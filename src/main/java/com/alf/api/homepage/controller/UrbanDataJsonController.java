@@ -38,7 +38,7 @@ public class UrbanDataJsonController {
 		return urbanDataJsonService.selectPbAreaAllData(parentid);
 	}
 	/**
-	 * 查询街道的接口 11111
+	 * 查询街道的接口 
 	 * @param parentid
 	 * @return
 	 */
