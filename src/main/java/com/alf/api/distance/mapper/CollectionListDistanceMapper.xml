@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alf.api.distance.mapper.CollectionListDistanceMapper" >
+	<!-- 查询快递员 与 用户的局里 -->
+	<select id="selectCourierListDistance" parameterType="java.lang.Integer" resultType="com.alf.api.distance.pojo.CourierAddress">
+		 SELECT bca.addressid,bca.`describes`,bca.`accurate`,bca.`price`,bp.`personalid`,bp.`personallogo` as personallogo,bp.`personalname`,bs.`sitename`,
+			ST_Distance_Sphere(ST_GeomFromText(CONCAT('POINT(',bca.lng,' ',bca.lat,')')), ST_GeomFromText('POINT(${lng} ${lat})')) AS distance 
+			FROM bwt_connector_address bca 
+			LEFT JOIN `bwt_personal` bp ON(bca.`personalid` = bp.`personalid`) 
+			LEFT JOIN `bwt_site` bs ON(bs.siteid = bp.siteid)
+				WHERE bca.lng IS NOT NULL AND bca.lat IS NOT NULL
+				<if test="type == 2">
+					 AND  bca.area = ${area}
+					 ORDER BY CAST(SUBSTRING_INDEX(bca.price,'-',1) AS SIGNED  INTEGER),distance limit #{page},#{rows}
+				</if> 
+				<if test="type == 1">
+					ORDER BY distance,CAST(SUBSTRING_INDEX(bca.price,'-',1) AS SIGNED  INTEGER) limit #{page},#{rows}
+				</if>
+			
+	</select>
+</mapper>
