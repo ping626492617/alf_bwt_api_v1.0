@@ -19,5 +19,5 @@ public interface CollectionListDistanceService {
 	 * @param rows 每页加载多少条
 	 * @return
 	 */
-	public Map<String, Object> selectCourierListDistance(String lng,String lat,Integer type,Integer area,Integer page,Integer rows);
+	public Map<String, Object> selectCourierListDistance(String lng,String lat,Integer type,Integer area,Integer range,Integer page,Integer rows);
 }
