@@ -34,7 +34,7 @@ public class CollectionListDistanceController {
 	 */
 	@RequestMapping(value=("selectCourierListDistance"), produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String selectCourierListDistance(String lng,String lat,Integer type,@RequestParam(defaultValue="110105")Integer area,@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,HttpServletResponse response) {
+	public String selectCourierListDistance(String lng,String lat,Integer type,@RequestParam(defaultValue="110105")Integer area,Integer range,@RequestParam(defaultValue="1")Integer page,@RequestParam(defaultValue="10")Integer rows,HttpServletResponse response) {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		if(page <= 0) {
 			page = 1;
@@ -48,7 +48,7 @@ public class CollectionListDistanceController {
 				messageOut.setStatusParam();
 				messageOut.setStatusFail("lat是必传递的参数");
 			}else {
-				messageOut.setData(collectionListDistanceService.selectCourierListDistance(lng, lat,type,area, page, rows));
+				messageOut.setData(collectionListDistanceService.selectCourierListDistance(lng, lat,type,area,range, page, rows));
 				messageOut.setMsg("请求成功");
 				messageOut.setMsgCode(messageOut.STATUS_SUCCESS);
 			}
