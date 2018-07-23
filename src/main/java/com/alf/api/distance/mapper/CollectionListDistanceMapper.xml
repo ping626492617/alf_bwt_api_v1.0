@@ -16,6 +16,10 @@
 				<if test="type == 1">
 					ORDER BY distance,CAST(SUBSTRING_INDEX(bca.price,'-',1) AS SIGNED  INTEGER) limit #{page},#{rows}
 				</if>
+				<if test="type == 3">
+					 AND  ST_Distance_Sphere(ST_GeomFromText(CONCAT('POINT(',bca.lng,' ',bca.lat,')')), ST_GeomFromText('POINT(${lng} ${lat})')) &lt; #{range}
+					 ORDER BY CAST(SUBSTRING_INDEX(bca.price,'-',1) AS SIGNED  INTEGER),distance limit #{page},#{rows}
+				</if> 
 			
 	</select>
 </mapper>

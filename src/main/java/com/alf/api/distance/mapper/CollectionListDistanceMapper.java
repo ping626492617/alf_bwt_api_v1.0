@@ -17,5 +17,5 @@ public interface CollectionListDistanceMapper {
 	 * @param rows
 	 * @return
 	 */
-	public List<CourierAddress> selectCourierListDistance(@Param("lng")String lng,@Param("lat")String lat,@Param("type")Integer type,@Param("area")Integer area,@Param("page")Integer page,@Param("rows")Integer rows);
+	public List<CourierAddress> selectCourierListDistance(@Param("lng")String lng,@Param("lat")String lat,@Param("type")Integer type,@Param("area")Integer area,@Param("range")Integer range,@Param("page")Integer page,@Param("rows")Integer rows);
 }
